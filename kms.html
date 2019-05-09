@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+使用 KMS 激活 Microsoft 产品
+
+⚠ 前言
+1. 使用此方法激活并不是正版，需要正版请前往微软商城购买。
+2. KMS 只能激活批量授权 (Volume License) 产品，无法激活零售 (Retail) 产品。
+3. KMS 激活有效期为 180 天 (常规版本) ，但是一般会连接 KMS 服务器进行自动续期。
+4. 高端玩家可以考虑本地 KMS 或者路由器 KMS 。
+5. 本文只谈 KMS 激活，怎么安装怎么使用不在讨论之列。
+6. 非 MSDN 原版 / 使用过 KMS 软件的，不保证可以通过本文命令方式激活。
+7. 广告：出售各版本永久激活服务，Office 365 A1P 账号等。
+KMS 基本操作
+常规三步操作：1.安装KMS密钥； 2.指定KMS服务器地址； 3.激活产品。
+
+个人不推荐使用 KMS 软件，毕竟有些软件有可能带有捆绑，推广等。
+
+下面将对 KMS 的命令行激活进行较为详细的说明：
+
+一、Windows 系列
+对于 Windows 10 ，目前有数字权利工具 (通过模拟升级获取 Ticket 进行激活) 直接获取数字权利，可以考虑不使用 KMS 。
+
+下面列出了所有可以通过 KMS 激活的版本及其 KMS 密钥，请选择对应的版本。
+
+单击查看 KMS 密钥
+以管理员身份运行 命令提示符 / PowerShell ，分别执行以下命令 (注意空格)：
+
+slmgr.vbs /ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX(KMS 密钥)
+slmgr.vbs /skms kms.loli.beer(KMS 服务器地址)
+slmgr.vbs /ato
+下面以 Windows 10 Professional for Workstations 为例进行演示：
+
+slmgr.vbs /ipk NRG8B-VKK3Q-CXVCJ-9G2XF-6Q84J
+slmgr.vbs /skms kms.loli.beer
+slmgr.vbs /ato
+上面用到的 KMS 服务器 kms.loli.beer 由我维护，并对外开放使用。
+
+KMS Activation
+
+查看到期时间：
+
+slmgr.vbs /xpr
+KMS Activation
+
+二、Office / Visio / Project
+首先需要明确的是， Visio 和 Project 是独立于 Office 的不同软件 (Mondo 测试许可除外)，需要单独激活，并且它们比 Office 贵得多！以及 Office 中的每一个套件也都是有独立许可版本的，但是太麻烦了建议还是直接使用 Office 比较好。
+
+批量与零售版本的判断与转换
+Office 2010 / 2013 对批量和零售的划分较为清楚，安装时就要确认安装的是批量版本，下面是判断批量与零售的方法：
+1. 从安装包名称判断 (仅适用于 MSDN 来源的镜像)：批量的安装包以 SW 开头；零售以语言开头，如 cn 。
+2. 已安装从软件判断：转到软件的产品信息页面 (就是显示是否激活的页面)，查看是否有 更改产品密钥 选项，有则为批量，没有则为零售。
+Office 2016 也可以使用上面的方法判断，但是 16 的零售基于 C2R ，安装后可以轻松转换为批量版本 (最新的 2016 零售也可以通过安装证书直接转为 2019 版本)。
+为了大家使用方便，这里推荐使用 Office Tool Plus (https://otp.landian.la)：
+转到“激活”选项卡，在右边的“证书管理”中选择对应版本的 批量(Volume) 证书安装即可。
+
+如果需要手动安装证书可以使用 ospp.vbs /inslic: 命令(不懂别用)。
+Office 2019 批量零售都是基于 C2R 的，所有版本都可以相互转换，也可以转为 365 / 2016 版本，转换方法参考上一条。
+下面列出了所有可以通过 KMS 激活的版本及其 KMS 密钥，请选择对应的版本。
+
+单击查看 KMS 密钥
+这里演示激活也是使用 Office Tool Plus 来完成的：
+注意：Office 2010 需要使用命令行激活， OTP 不支持。
+1. 填入对应版本的 KMS 密钥并安装。
+2. 填入 KMS 服务器地址 (kms.loli.beer) 并设定。
+3. 激活产品。
+
+
+不使用 Office Tool Plus 而使用命令行方法：
+需要你自行指定 ospp.vbs 所在目录，在 Office 安装目录下找。
+
+cscript "ospp.vbs" /inpkey:XXXXX-XXXXX-XXXXX-XXXXX-XXXXX(KMS 密钥)
+cscript "ospp.vbs" /sethst:kms.loli.beer(KMS 服务器地址)
+cscript "ospp.vbs" /act
+进阶：Windows 8 及以后的版本也可以使用 slmgr.vbs + SKUID 处理 Office，
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "kms.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+</body>
+</html>
